@@ -1,0 +1,121 @@
+{
+  "header": {
+    "tours": "Tours",
+    "destinations": "Destinations",
+    "shop": "Shop",
+    "gallery": "Gallery",
+    "about": "About",
+    "reserve": "Book now",
+    "cart": "Cart"
+  },
+  "hero": {
+    "eyebrow": "Discover authentic Peru",
+    "title_1": "Journeys that",
+    "title_2": "connect people",
+    "subtitle": "Discover unique destinations, live shared experiences and create memories that last forever. Tourism, culture and human connection in one place.",
+    "cta_tours": "Explore Tours",
+    "cta_shop": "Visit Shop",
+    "cta_contact": "Contact Us",
+    "stat_travelers": "Travelers",
+    "stat_destinations": "Destinations",
+    "stat_rating": "Rating"
+  },
+  "destinations": {
+    "eyebrow": "Explore Peru",
+    "title": "Destinations that inspire",
+    "subtitle": "From the Andean peaks to the Amazon depths, every destination is a story waiting to be lived.",
+    "explore": "Explore",
+    "tours_count": "{{count}} tours available",
+    "view_all": "View all destinations"
+  },
+  "tours": {
+    "eyebrow": "Our Tours",
+    "title": "Experiences designed for you",
+    "subtitle": "Tours that combine adventure, culture and the opportunity to meet extraordinary people.",
+    "filter_all": "All",
+    "filter_fullday": "Full Day",
+    "filter_weekend": "Weekend",
+    "filter_adventure": "Adventure",
+    "filter_cultural": "Cultural",
+    "filter_social": "Social",
+    "badge_social": "⚡ SOCIAL",
+    "badge_new": "NEW",
+    "badge_popular": "POPULAR",
+    "from": "From",
+    "per_person": "/ person",
+    "duration": "Duration",
+    "group_size": "Group",
+    "difficulty": "Difficulty",
+    "rating_reviews": "reviews",
+    "view_tour": "View tour",
+    "reserve": "Book",
+    "view_all": "View all tours"
+  },
+  "connection": {
+    "eyebrow": "What makes us unique",
+    "title_1": "Journeys that",
+    "title_2": "connect people",
+    "subtitle": "More than a tour, it's an opportunity to meet incredible people in unique natural settings. Elegant, authentic, memorable.",
+    "feature_1_title": "Group experiences",
+    "feature_1_desc": "Tours designed so that togetherness is part of the journey. Selected groups to ensure compatibility.",
+    "feature_2_title": "Authentic connections",
+    "feature_2_desc": "Natural environments that foster genuine encounters. No forcing, no artificiality. Just people and experiences.",
+    "feature_3_title": "Shared memories",
+    "feature_3_desc": "The best memories are created in company. Each tour is a story you'll keep telling years later.",
+    "stat_travelers": "Connected travelers",
+    "stat_experiences": "Group experiences",
+    "stat_destinations": "Destinations",
+    "stat_rating": "Average rating",
+    "cta": "Join the travel community",
+    "quote": "\"I came to see Machu Picchu. I left with friendships for life.\"",
+    "quote_author": "— Valentina Ríos, Lima"
+  },
+  "gallery": {
+    "eyebrow": "Gallery",
+    "title": "Moments that inspire",
+    "subtitle": "Real images from our travelers at the most impressive destinations in Peru.",
+    "view_all": "View full gallery"
+  },
+  "shop": {
+    "eyebrow": "Regional Shop",
+    "title": "Flavors and art from Peru",
+    "subtitle": "Authentic products from the regions we visit. Take a piece of Peru wherever you go.",
+    "filter_all": "All",
+    "add_cart": "Add to cart",
+    "added": "Added",
+    "from_region": "From",
+    "reviews": "reviews",
+    "new": "NEW",
+    "view_all": "View full shop"
+  },
+  "testimonials": {
+    "eyebrow": "Real stories",
+    "title": "What our travelers say",
+    "subtitle": "Thousands of people have trusted Amor y Aventura for their most memorable experiences.",
+    "social_tag": "💫 Created special connections"
+  },
+  "cta": {
+    "title_1": "Your next adventure",
+    "title_2": "starts here",
+    "subtitle": "Book a tour, buy regional products or just write to us. We're here to help you live the Peru you always dreamed of.",
+    "explore_tours": "Explore Tours",
+    "whatsapp": "Chat on WhatsApp",
+    "shop": "Visit Shop"
+  },
+  "footer": {
+    "tagline": "Authentic tourism, real connections and regional products from Peru.",
+    "tours": "Tours",
+    "shop": "Shop",
+    "company": "Company",
+    "about": "About us",
+    "contact": "Contact",
+    "blog": "Blog",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "rights": "All rights reserved.",
+    "made": "Made with ❤️ in Peru"
+  },
+  "whatsapp": {
+    "message": "Hello, I'm interested in learning more about your tours and experiences at Amor y Aventura"
+  }
+}

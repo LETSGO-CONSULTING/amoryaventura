@@ -1,0 +1,55 @@
+import type { Destination } from '@/models'
+
+export const destinations: Destination[] = [
+  {
+    id: '1',
+    name: 'Machu Picchu',
+    region: 'Cusco',
+    image: 'https://images.unsplash.com/photo-1526392060635-9d6019884377?w=800&auto=format&fit=crop&q=80',
+    description: 'La ciudadela inca más famosa del mundo, suspendida entre nubes y montañas.',
+    toursCount: 12,
+    featured: true,
+  },
+  {
+    id: '2',
+    name: 'Lago Titicaca',
+    region: 'Puno',
+    image: 'https://images.unsplash.com/photo-1587595431973-160d0d94add1?w=800&auto=format&fit=crop&q=80',
+    description: 'El lago navegable más alto del mundo, hogar de culturas milenarias.',
+    toursCount: 8,
+    featured: true,
+  },
+  {
+    id: '3',
+    name: 'Amazonas',
+    region: 'Loreto',
+    image: 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=800&auto=format&fit=crop&q=80',
+    description: 'La selva más biodiversa del planeta, una experiencia transformadora.',
+    toursCount: 10,
+    featured: true,
+  },
+  {
+    id: '4',
+    name: 'Huacachina',
+    region: 'Ica',
+    image: 'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&auto=format&fit=crop&q=80',
+    description: 'El oasis en medio del desierto, aventura en dunas de arena dorada.',
+    toursCount: 6,
+  },
+  {
+    id: '5',
+    name: 'Valle Sagrado',
+    region: 'Cusco',
+    image: 'https://images.unsplash.com/photo-1580502304784-8985b7eb7260?w=800&auto=format&fit=crop&q=80',
+    description: 'Paisajes andinos, mercados coloridos y ruinas que guardan secretos milenarios.',
+    toursCount: 9,
+  },
+  {
+    id: '6',
+    name: 'Cañón del Colca',
+    region: 'Arequipa',
+    image: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800&auto=format&fit=crop&q=80',
+    description: 'El cañón más profundo del mundo, cóndores y paisajes de otra dimensión.',
+    toursCount: 7,
+  },
+]

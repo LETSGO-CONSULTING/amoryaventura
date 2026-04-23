@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-warm text-brand-dark font-sans antialiased;
+  }
+
+  ::selection {
+    @apply bg-coral/20 text-coral;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-sand;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-coral/40 rounded-full;
+  }
+}
+
+@layer components {
+  .section-padding {
+    @apply py-20 md:py-28;
+  }
+
+  .container-base {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn-primary {
+    @apply bg-coral hover:bg-coral-dark text-white font-semibold px-7 py-3.5 rounded-full transition-all duration-200 hover:scale-105 hover:shadow-lg hover:shadow-coral/30 active:scale-100;
+  }
+
+  .btn-outline {
+    @apply border-2 border-brand-border hover:border-coral text-brand-dark hover:text-coral font-semibold px-7 py-3.5 rounded-full transition-all duration-200;
+  }
+
+  .btn-ghost-white {
+    @apply bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/30 text-white font-semibold px-7 py-3.5 rounded-full transition-all duration-200;
+  }
+
+  .card-base {
+    @apply bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300;
+  }
+
+  .section-eyebrow {
+    @apply text-coral text-sm font-semibold tracking-widest uppercase;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold text-brand-dark leading-tight;
+  }
+
+  .section-subtitle {
+    @apply text-brand-secondary text-lg leading-relaxed max-w-2xl mx-auto;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}

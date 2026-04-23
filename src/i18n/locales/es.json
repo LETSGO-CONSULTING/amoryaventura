@@ -1,0 +1,121 @@
+{
+  "header": {
+    "tours": "Tours",
+    "destinations": "Destinos",
+    "shop": "Tienda",
+    "gallery": "Galería",
+    "about": "Nosotros",
+    "reserve": "Reservar ahora",
+    "cart": "Carrito"
+  },
+  "hero": {
+    "eyebrow": "Descubre el Perú auténtico",
+    "title_1": "Viajes que",
+    "title_2": "conectan personas",
+    "subtitle": "Descubre destinos únicos, vive experiencias compartidas y crea recuerdos que duran para siempre. Turismo, cultura y conexión humana en un solo lugar.",
+    "cta_tours": "Explorar Tours",
+    "cta_shop": "Ver Tienda",
+    "cta_contact": "Contactar",
+    "stat_travelers": "Viajeros",
+    "stat_destinations": "Destinos",
+    "stat_rating": "Calificación"
+  },
+  "destinations": {
+    "eyebrow": "Explora Perú",
+    "title": "Destinos que inspiran",
+    "subtitle": "Desde las cumbres andinas hasta la profundidad del Amazonas, cada destino es una historia por vivir.",
+    "explore": "Explorar",
+    "tours_count": "{{count}} tours disponibles",
+    "view_all": "Ver todos los destinos"
+  },
+  "tours": {
+    "eyebrow": "Nuestros Tours",
+    "title": "Experiencias diseñadas para ti",
+    "subtitle": "Tours que combinan aventura, cultura y la oportunidad de conocer personas extraordinarias.",
+    "filter_all": "Todos",
+    "filter_fullday": "Full Day",
+    "filter_weekend": "Fin de Semana",
+    "filter_adventure": "Aventura",
+    "filter_cultural": "Cultural",
+    "filter_social": "Social",
+    "badge_social": "⚡ SOCIAL",
+    "badge_new": "NUEVO",
+    "badge_popular": "POPULAR",
+    "from": "Desde",
+    "per_person": "/ persona",
+    "duration": "Duración",
+    "group_size": "Grupo",
+    "difficulty": "Dificultad",
+    "rating_reviews": "reseñas",
+    "view_tour": "Ver tour",
+    "reserve": "Reservar",
+    "view_all": "Ver todos los tours"
+  },
+  "connection": {
+    "eyebrow": "Lo que nos hace únicos",
+    "title_1": "Viajes que",
+    "title_2": "conectan personas",
+    "subtitle": "Más que un tour, es una oportunidad de conocer personas increíbles en entornos naturales únicos. Elegante, auténtico, memorable.",
+    "feature_1_title": "Experiencias grupales",
+    "feature_1_desc": "Tours diseñados para que la convivencia sea parte del viaje. Grupos seleccionados para garantizar compatibilidad.",
+    "feature_2_title": "Conexiones auténticas",
+    "feature_2_desc": "Entornos naturales que favorecen el encuentro genuino. Sin forzar, sin artificialidad. Solo personas y experiencias.",
+    "feature_3_title": "Recuerdos compartidos",
+    "feature_3_desc": "Los mejores recuerdos se crean en compañía. Cada tour es una historia que seguirás contando años después.",
+    "stat_travelers": "Viajeros conectados",
+    "stat_experiences": "Experiencias grupales",
+    "stat_destinations": "Destinos",
+    "stat_rating": "Promedio de reseñas",
+    "cta": "Únete a la comunidad viajera",
+    "quote": "\"Vine a ver Machu Picchu. Me fui con amistades para toda la vida.\"",
+    "quote_author": "— Valentina Ríos, Lima"
+  },
+  "gallery": {
+    "eyebrow": "Galería",
+    "title": "Momentos que inspiran",
+    "subtitle": "Imágenes reales de nuestros viajeros en los destinos más impresionantes del Perú.",
+    "view_all": "Ver galería completa"
+  },
+  "shop": {
+    "eyebrow": "Tienda Regional",
+    "title": "Sabores y arte del Perú",
+    "subtitle": "Productos auténticos de las regiones que visitamos. Lleva un pedazo de Perú donde vayas.",
+    "filter_all": "Todos",
+    "add_cart": "Agregar al carrito",
+    "added": "Agregado",
+    "from_region": "De",
+    "reviews": "reseñas",
+    "new": "NUEVO",
+    "view_all": "Ver toda la tienda"
+  },
+  "testimonials": {
+    "eyebrow": "Historias reales",
+    "title": "Lo que dicen nuestros viajeros",
+    "subtitle": "Miles de personas han confiado en Amor y Aventura para sus experiencias más memorables.",
+    "social_tag": "💫 Creó conexiones especiales"
+  },
+  "cta": {
+    "title_1": "Tu próxima aventura",
+    "title_2": "empieza aquí",
+    "subtitle": "Reserva un tour, compra productos regionales o simplemente escríbenos. Estamos aquí para ayudarte a vivir el Perú que siempre soñaste.",
+    "explore_tours": "Explorar Tours",
+    "whatsapp": "Escribir por WhatsApp",
+    "shop": "Visitar Tienda"
+  },
+  "footer": {
+    "tagline": "Turismo auténtico, conexiones reales y productos regionales del Perú.",
+    "tours": "Tours",
+    "shop": "Tienda",
+    "company": "Empresa",
+    "about": "Sobre nosotros",
+    "contact": "Contacto",
+    "blog": "Blog",
+    "privacy": "Privacidad",
+    "terms": "Términos",
+    "rights": "Todos los derechos reservados.",
+    "made": "Hecho con ❤️ en Perú"
+  },
+  "whatsapp": {
+    "message": "Hola, me interesa conocer más sobre sus tours y experiencias en Amor y Aventura"
+  }
+}
