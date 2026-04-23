@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
+import { CheckCircle2, MessageCircle, Sparkles } from 'lucide-react'
 import { tours } from '@/mocks/tours'
 import TourCard from './TourCard'
-import type { TourCategory } from '@/models'
+import TourModal from './TourModal'
+import type { Tour, TourCategory } from '@/models'
 
 const CATEGORIES: TourCategory[] = ['Todos', 'Full Day', 'Fin de Semana', 'Aventura', 'Cultural', 'Social']
 
@@ -16,9 +18,78 @@ const I18N_KEYS: Record<TourCategory, string> = {
   Social: 'tours.filter_social',
 }
 
+const WHATSAPP = '+51928686294'
+
+const PACKAGES = [
+  {
+    id: '2d1n',
+    name: 'Escapada Verde',
+    duration: '2 Días / 1 Noche',
+    badge: 'Más elegido',
+    badgeColor: 'bg-coral text-white',
+    price: 349,
+    tours: ['Tour Oxapampa', 'Tour Pozuzo'],
+    includes: [
+      'Movilidad desde Lima (bus cama 160°)',
+      'Traslados internos',
+      'Hospedaje con baño privado y agua caliente',
+      '2 tours full day con guía',
+      'Tickets de ingreso',
+      'Sesión fotográfica',
+      'Sorteos sorpresivos',
+      'Atención 24h por WhatsApp',
+    ],
+    highlight: 'olive',
+    msg: 'Hola! Quiero información sobre el paquete *Escapada Verde (2D/1N)* para Oxapampa.',
+  },
+  {
+    id: '3d2n',
+    name: 'Exploradores',
+    duration: '3 Días / 2 Noches',
+    badge: 'Recomendado',
+    badgeColor: 'bg-vino text-white',
+    price: 499,
+    tours: ['Tour Oxapampa', 'Tour Pozuzo', 'Tour Villa Rica'],
+    includes: [
+      'Movilidad desde Lima (bus cama 160°)',
+      'Traslados internos',
+      'Hospedaje con baño privado y agua caliente',
+      '3 tours full day con guía',
+      'Tickets de ingreso',
+      'Sesión fotográfica',
+      'Sorteos sorpresivos',
+      'Atención 24h por WhatsApp',
+    ],
+    highlight: 'vino',
+    msg: 'Hola! Quiero información sobre el paquete *Exploradores (3D/2N)* para Oxapampa.',
+  },
+  {
+    id: '4d3n',
+    name: 'Gran Aventura',
+    duration: '4 Días / 3 Noches',
+    badge: 'Experiencia completa',
+    badgeColor: 'bg-olive text-white',
+    price: 699,
+    tours: ['Tour Oxapampa', 'Tour Pozuzo', 'Tour Villa Rica', 'Tour Perené'],
+    includes: [
+      'Movilidad desde Lima (bus cama 160°)',
+      'Traslados internos',
+      'Hospedaje con baño privado y agua caliente',
+      '4 tours full day con guía',
+      'Tickets de ingreso',
+      'Sesión fotográfica',
+      'Sorteos sorpresivos',
+      'Atención 24h por WhatsApp',
+    ],
+    highlight: 'olive',
+    msg: 'Hola! Quiero información sobre el paquete *Gran Aventura (4D/3N)* para Oxapampa.',
+  },
+]
+
 export default function ToursSection() {
   const { t } = useTranslation()
   const [active, setActive] = useState<TourCategory>('Todos')
+  const [selectedTour, setSelectedTour] = useState<Tour | null>(null)
 
   const filtered =
     active === 'Todos'
@@ -27,70 +98,189 @@ export default function ToursSection() {
       ? tours.filter((t) => t.isSocial)
       : tours.filter((t) => t.category === active)
 
+  const handleWA = (msg: string) => {
+    window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank')
+  }
+
   return (
-    <section id="tours" className="section-padding bg-sand">
-      <div className="container-base">
-        {/* Header */}
-        <div className="text-center mb-10">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="section-eyebrow mb-3"
-          >
-            {t('tours.eyebrow')}
-          </motion.p>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="section-title mb-4"
-          >
-            {t('tours.title')}
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="section-subtitle"
-          >
-            {t('tours.subtitle')}
-          </motion.p>
-        </div>
-
-        {/* Filter chips */}
-        <div className="flex flex-wrap justify-center gap-2 mb-10">
-          {CATEGORIES.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActive(cat)}
-              className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
-                active === cat
-                  ? 'bg-coral text-white shadow-md shadow-coral/30'
-                  : 'bg-white text-brand-secondary border border-brand-border hover:border-coral hover:text-coral'
-              }`}
+    <>
+      <section id="tours" className="section-padding bg-sand">
+        <div className="container-base">
+          {/* Header */}
+          <div className="text-center mb-10">
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="section-eyebrow mb-3"
             >
-              {t(I18N_KEYS[cat])}
-            </button>
-          ))}
-        </div>
+              {t('tours.eyebrow')}
+            </motion.p>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="section-title mb-4"
+            >
+              {t('tours.title')}
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="section-subtitle"
+            >
+              {t('tours.subtitle')}
+            </motion.p>
+          </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filtered.map((tour, i) => (
-            <TourCard key={tour.id} tour={tour} index={i} />
-          ))}
-        </div>
+          {/* Filter chips */}
+          <div className="flex flex-wrap justify-center gap-2 mb-10">
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActive(cat)}
+                className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
+                  active === cat
+                    ? 'bg-coral text-white shadow-md shadow-coral/30'
+                    : 'bg-white text-brand-secondary border border-brand-border hover:border-coral hover:text-coral'
+                }`}
+              >
+                {t(I18N_KEYS[cat])}
+              </button>
+            ))}
+          </div>
 
-        {/* CTA */}
-        <div className="text-center mt-12">
-          <button className="btn-primary">
-            {t('tours.view_all')}
-          </button>
+          {/* Tour grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {filtered.map((tour, i) => (
+              <TourCard
+                key={tour.id}
+                tour={tour}
+                index={i}
+                onClick={() => setSelectedTour(tour)}
+              />
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Packages section */}
+      <section id="paquetes" className="section-padding bg-warm">
+        <div className="container-base">
+          <div className="text-center mb-12">
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="section-eyebrow mb-3"
+            >
+              Paquetes
+            </motion.p>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="section-title mb-4"
+            >
+              Nuestros Paquetes
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="section-subtitle"
+            >
+              Todo incluido desde Lima. Elige los días que tienes y nosotros hacemos el resto.
+            </motion.p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+            {PACKAGES.map((pkg, i) => (
+              <motion.div
+                key={pkg.id}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.12 }}
+                className={`relative flex flex-col bg-white rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden ${
+                  i === 1 ? 'ring-2 ring-vino' : ''
+                }`}
+              >
+                {/* Top accent bar */}
+                <div
+                  className={`h-1.5 w-full ${
+                    pkg.highlight === 'olive' ? 'bg-olive' : 'bg-vino'
+                  }`}
+                />
+
+                <div className="p-6 flex flex-col flex-1">
+                  {/* Badge */}
+                  <span className={`self-start text-xs font-bold px-3 py-1 rounded-full mb-4 flex items-center gap-1 ${pkg.badgeColor}`}>
+                    <Sparkles className="w-3 h-3" />
+                    {pkg.badge}
+                  </span>
+
+                  <h3 className="text-xl font-bold text-brand-dark mb-1">{pkg.name}</h3>
+                  <p className="text-sm text-brand-secondary mb-5">{pkg.duration}</p>
+
+                  {/* Price */}
+                  <div className="mb-5">
+                    <span className="text-xs text-brand-secondary">Desde</span>
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-3xl font-bold text-brand-dark">S/. {pkg.price}</span>
+                      <span className="text-sm text-brand-secondary">/ persona</span>
+                    </div>
+                  </div>
+
+                  {/* Tours included */}
+                  <div className="mb-5">
+                    <p className="text-xs font-semibold text-brand-secondary uppercase tracking-wide mb-2">
+                      Tours incluidos
+                    </p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {pkg.tours.map((t) => (
+                        <span
+                          key={t}
+                          className="text-xs bg-sand text-brand-dark border border-brand-border px-2.5 py-1 rounded-full"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Includes */}
+                  <ul className="space-y-2 mb-6 flex-1">
+                    {pkg.includes.map((item) => (
+                      <li key={item} className="flex items-start gap-2 text-xs text-brand-secondary">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-olive flex-shrink-0 mt-0.5" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* CTA */}
+                  <button
+                    onClick={() => handleWA(pkg.msg)}
+                    className="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-semibold py-3.5 rounded-2xl transition-all duration-200 hover:scale-[1.02] hover:shadow-lg shadow-[#25D366]/20 text-sm"
+                  >
+                    <MessageCircle className="w-5 h-5" />
+                    Consultar por WhatsApp
+                  </button>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Tour detail modal */}
+      <TourModal tour={selectedTour} onClose={() => setSelectedTour(null)} />
+    </>
   )
 }

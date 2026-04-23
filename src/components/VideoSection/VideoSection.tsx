@@ -4,24 +4,24 @@ import { Play, MapPin } from 'lucide-react'
 const VIDEOS = [
   {
     id: '1',
-    title: 'Machu Picchu · La ciudad en las nubes',
-    thumbnail: 'https://images.unsplash.com/photo-1526392060635-9d6019884377?w=700&auto=format&fit=crop&q=80',
-    duration: '3:42',
-    location: 'Cusco, Perú',
+    title: 'Oxapampa · Valle verde entre montañas',
+    thumbnail: 'https://images.unsplash.com/photo-1448375240586-882707db888b?w=700&auto=format&fit=crop&q=80',
+    duration: '4:12',
+    location: 'Oxapampa, Pasco',
   },
   {
     id: '2',
-    title: 'Amazonas · Expedición en la selva',
-    thumbnail: 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=700&auto=format&fit=crop&q=80',
-    duration: '5:18',
-    location: 'Loreto, Perú',
+    title: 'Pozuzo · Aguas turquesas y cascadas',
+    thumbnail: 'https://images.unsplash.com/photo-1455218873509-8097305ee378?w=700&auto=format&fit=crop&q=80',
+    duration: '3:47',
+    location: 'Pozuzo, Pasco',
   },
   {
     id: '3',
-    title: 'Huacachina · Adrenalina en las dunas',
-    thumbnail: 'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=700&auto=format&fit=crop&q=80',
-    duration: '2:55',
-    location: 'Ica, Perú',
+    title: 'Villa Rica · La capital del café peruano',
+    thumbnail: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=700&auto=format&fit=crop&q=80',
+    duration: '5:03',
+    location: 'Villa Rica, Pasco',
   },
 ]
 
@@ -54,7 +54,7 @@ export default function VideoSection() {
             transition={{ delay: 0.2 }}
             className="section-subtitle"
           >
-            Déjate inspirar por los destinos más impresionantes del Perú antes de vivirlos.
+            Déjate inspirar por Oxapampa, Pozuzo y Villa Rica antes de vivirlos.
           </motion.p>
         </div>
 
@@ -75,19 +75,16 @@ export default function VideoSection() {
               />
               <div className="absolute inset-0 bg-black/40 group-hover:bg-black/55 transition-colors duration-300" />
 
-              {/* Play button */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="w-14 h-14 bg-white/90 group-hover:bg-white rounded-full flex items-center justify-center transition-all duration-300 group-hover:scale-110 shadow-lg">
                   <Play className="w-6 h-6 text-coral fill-coral ml-1" />
                 </div>
               </div>
 
-              {/* Duration badge */}
               <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-sm text-white text-xs font-mono px-2 py-1 rounded">
                 {video.duration}
               </div>
 
-              {/* Info */}
               <div className="absolute bottom-0 left-0 right-0 p-4">
                 <div className="flex items-center gap-1 text-white/70 text-xs mb-1">
                   <MapPin className="w-3 h-3" />

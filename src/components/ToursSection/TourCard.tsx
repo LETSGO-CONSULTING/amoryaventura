@@ -6,9 +6,10 @@ import type { Tour } from '@/models'
 interface Props {
   tour: Tour
   index?: number
+  onClick?: () => void
 }
 
-export default function TourCard({ tour, index = 0 }: Props) {
+export default function TourCard({ tour, index = 0, onClick }: Props) {
   const { t } = useTranslation()
 
   const badge = tour.isSocial
@@ -25,7 +26,8 @@ export default function TourCard({ tour, index = 0 }: Props) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.08 }}
-      className="card-base group flex flex-col"
+      onClick={onClick}
+      className="card-base group flex flex-col cursor-pointer"
     >
       {/* Image */}
       <div className="relative overflow-hidden aspect-video flex-shrink-0">
@@ -78,10 +80,16 @@ export default function TourCard({ tour, index = 0 }: Props) {
         </div>
 
         <div className="mt-auto grid grid-cols-2 gap-2">
-          <button className="btn-outline text-sm py-2.5 px-4">
+          <button
+            onClick={onClick}
+            className="btn-outline text-sm py-2.5 px-4"
+          >
             {t('tours.view_tour')}
           </button>
-          <button className="btn-primary text-sm py-2.5 px-4">
+          <button
+            onClick={onClick}
+            className="btn-primary text-sm py-2.5 px-4"
+          >
             {t('tours.reserve')}
           </button>
         </div>

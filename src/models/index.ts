@@ -2,10 +2,12 @@ export interface Destination {
   id: string
   name: string
   region: string
+  zone: string
   image: string
   description: string
   toursCount: number
   featured?: boolean
+  status: 'active' | 'coming_soon'
 }
 
 export interface Tour {
@@ -27,6 +29,10 @@ export interface Tour {
   isPopular: boolean
   highlights: string[]
   includes: string[]
+  notIncludes: string[]
+  itinerary: string[]
+  whatToBring: string[]
+  departure?: string
   description: string
 }
 
