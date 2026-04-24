@@ -48,7 +48,7 @@ const PACKAGES = [
     duration: '3 Días / 2 Noches',
     badge: 'Recomendado',
     badgeColor: 'bg-vino text-white',
-    price: 499,
+    price: 449,
     tours: ['Tour Oxapampa', 'Tour Pozuzo', 'Tour Villa Rica'],
     includes: [
       'Movilidad desde Lima (bus cama 160°)',
@@ -69,7 +69,7 @@ const PACKAGES = [
     duration: '4 Días / 3 Noches',
     badge: 'Experiencia completa',
     badgeColor: 'bg-olive text-white',
-    price: 699,
+    price: 549,
     tours: ['Tour Oxapampa', 'Tour Pozuzo', 'Tour Villa Rica', 'Tour Perené'],
     includes: [
       'Movilidad desde Lima (bus cama 160°)',
