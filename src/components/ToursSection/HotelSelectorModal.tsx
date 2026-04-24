@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, MapPin, Waves, Coffee, Car, PawPrint, CheckCircle2 } from 'lucide-react'
 import type { Hotel } from './PackageCard'
@@ -23,10 +23,23 @@ interface Props {
 export default function HotelSelectorModal({
   open, pkgId, pkgName, hotels, selected, onSelect, onClose,
 }: Props) {
+  const [activeFilters, setActiveFilters] = useState<Array<keyof typeof AMENITY_CONFIG>>([])
+
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : ''
+    if (!open) setActiveFilters([])
     return () => { document.body.style.overflow = '' }
   }, [open])
+
+  const toggleFilter = (key: keyof typeof AMENITY_CONFIG) => {
+    setActiveFilters((prev) =>
+      prev.includes(key) ? prev.filter((f) => f !== key) : [...prev, key]
+    )
+  }
+
+  const filteredHotels = activeFilters.length === 0
+    ? hotels
+    : hotels.filter((h) => activeFilters.every((f) => h.amenities.includes(f)))
 
   const handlePick = (hotel: Hotel) => {
     onSelect(hotel)
@@ -75,20 +88,48 @@ export default function HotelSelectorModal({
               </button>
             </div>
 
-            {/* Legend */}
-            <div className="flex-shrink-0 flex items-center gap-4 px-6 py-2.5 bg-sand border-b border-brand-border text-xs text-brand-secondary flex-wrap">
-              {Object.entries(AMENITY_CONFIG).map(([key, { icon: Icon, label, color }]) => (
-                <span key={key} className="flex items-center gap-1">
-                  <Icon className={`w-3.5 h-3.5 ${color}`} />
-                  {label}
-                </span>
-              ))}
+            {/* Filter chips */}
+            <div className="flex-shrink-0 flex items-center gap-2 px-4 py-3 bg-sand border-b border-brand-border flex-wrap">
+              <span className="text-[10px] font-semibold text-brand-secondary uppercase tracking-wide mr-1">Filtrar:</span>
+              {(Object.entries(AMENITY_CONFIG) as Array<[keyof typeof AMENITY_CONFIG, typeof AMENITY_CONFIG[keyof typeof AMENITY_CONFIG]]>).map(([key, { icon: Icon, label, color }]) => {
+                const active = activeFilters.includes(key)
+                return (
+                  <button
+                    key={key}
+                    onClick={() => toggleFilter(key)}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border transition-all duration-150 ${
+                      active
+                        ? 'bg-brand-dark text-white border-brand-dark shadow-sm'
+                        : 'bg-white text-brand-secondary border-brand-border hover:border-brand-dark hover:text-brand-dark'
+                    }`}
+                  >
+                    <Icon className={`w-3.5 h-3.5 ${active ? 'text-white' : color}`} />
+                    {label}
+                  </button>
+                )
+              })}
+              {activeFilters.length > 0 && (
+                <button
+                  onClick={() => setActiveFilters([])}
+                  className="text-[10px] text-coral underline ml-1"
+                >
+                  Limpiar
+                </button>
+              )}
             </div>
 
             {/* Hotel list — scrollable */}
             <div className="flex-1 overflow-y-auto">
+              {filteredHotels.length === 0 && (
+                <div className="flex flex-col items-center justify-center py-12 text-brand-secondary">
+                  <p className="text-sm font-medium">Sin alojamientos con esos servicios</p>
+                  <button onClick={() => setActiveFilters([])} className="text-xs text-coral underline mt-2">
+                    Limpiar filtros
+                  </button>
+                </div>
+              )}
               {(['Hospedaje', 'Hotel', 'Cabañas', 'Hotel / Cabaña'] as const).map((type) => {
-                const group = hotels.filter((h) => h.type === type)
+                const group = filteredHotels.filter((h) => h.type === type)
                 if (!group.length) return null
                 return (
                   <div key={type}>
