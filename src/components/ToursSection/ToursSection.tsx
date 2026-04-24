@@ -29,15 +29,19 @@ const PACKAGES = [
     badgeColor: 'bg-coral text-white',
     price: 349,
     tours: ['Tour Oxapampa', 'Tour Pozuzo'],
+    schedule: [
+      { day: 'Día 1', label: 'Full Day Oxapampa', time: '10:30 am – 6:30 pm' },
+      { day: 'Día 2', label: 'Full Day Pozuzo', time: '10:30 am – 6:30 pm' },
+    ],
     includes: [
-      'Movilidad desde Lima (bus cama 160°)',
+      'Bus cama 160° desde Lima',
       'Traslados internos',
-      'Hospedaje con baño privado y agua caliente',
+      'Hospedaje baño privado + TV Smart',
       '2 tours full day con guía',
       'Tickets de ingreso',
       'Sesión fotográfica',
-      'Sorteos sorpresivos',
-      'Atención 24h por WhatsApp',
+      'Sorteos de productos locales',
+      'Atención 24/7 por WhatsApp',
     ],
     highlight: 'olive',
     msg: 'Hola! Quiero información sobre el paquete *Escapada Verde (2D/1N)* para Oxapampa.',
@@ -50,15 +54,20 @@ const PACKAGES = [
     badgeColor: 'bg-vino text-white',
     price: 449,
     tours: ['Tour Oxapampa', 'Tour Pozuzo', 'Tour Villa Rica'],
+    schedule: [
+      { day: 'Día 1', label: 'Full Day Oxapampa', time: '10:30 am – 6:30 pm' },
+      { day: 'Día 2', label: 'Full Day Pozuzo', time: '10:30 am – 6:30 pm' },
+      { day: 'Día 3', label: 'Full Day Villa Rica', time: '10:30 am – 6:30 pm' },
+    ],
     includes: [
-      'Movilidad desde Lima (bus cama 160°)',
+      'Bus cama 160° desde Lima',
       'Traslados internos',
-      'Hospedaje con baño privado y agua caliente',
+      'Hospedaje baño privado + TV Smart',
       '3 tours full day con guía',
       'Tickets de ingreso',
       'Sesión fotográfica',
-      'Sorteos sorpresivos',
-      'Atención 24h por WhatsApp',
+      'Sorteos de productos locales',
+      'Atención 24/7 por WhatsApp',
     ],
     highlight: 'vino',
     msg: 'Hola! Quiero información sobre el paquete *Exploradores (3D/2N)* para Oxapampa.',
@@ -71,15 +80,21 @@ const PACKAGES = [
     badgeColor: 'bg-olive text-white',
     price: 549,
     tours: ['Tour Oxapampa', 'Tour Pozuzo', 'Tour Villa Rica', 'Tour Perené'],
+    schedule: [
+      { day: 'Día 1', label: 'Full Day Pozuzo', time: '10:30 am – 6:30 pm' },
+      { day: 'Día 2', label: 'Full Day Villa Rica', time: '10:30 am – 6:30 pm' },
+      { day: 'Día 3', label: 'Full Day Perené', time: '10:30 am – 6:30 pm' },
+      { day: 'Día 4', label: 'Full Day Oxapampa', time: '10:30 am – 6:30 pm' },
+    ],
     includes: [
-      'Movilidad desde Lima (bus cama 160°)',
+      'Bus cama 160° desde Lima',
       'Traslados internos',
-      'Hospedaje con baño privado y agua caliente',
+      'Hospedaje baño privado + TV Smart',
       '4 tours full day con guía',
       'Tickets de ingreso',
       'Sesión fotográfica',
-      'Sorteos sorpresivos',
-      'Atención 24h por WhatsApp',
+      'Sorteos de productos locales',
+      'Atención 24/7 por WhatsApp',
     ],
     highlight: 'olive',
     msg: 'Hola! Quiero información sobre el paquete *Gran Aventura (4D/3N)* para Oxapampa.',
@@ -237,19 +252,20 @@ export default function ToursSection() {
                     </div>
                   </div>
 
-                  {/* Tours included */}
+                  {/* Schedule day by day */}
                   <div className="mb-5">
                     <p className="text-xs font-semibold text-brand-secondary uppercase tracking-wide mb-2">
-                      Tours incluidos
+                      Itinerario
                     </p>
-                    <div className="flex flex-wrap gap-1.5">
-                      {pkg.tours.map((t) => (
-                        <span
-                          key={t}
-                          className="text-xs bg-sand text-brand-dark border border-brand-border px-2.5 py-1 rounded-full"
-                        >
-                          {t}
-                        </span>
+                    <div className="space-y-1.5">
+                      {pkg.schedule.map((s) => (
+                        <div key={s.day} className="flex items-center gap-2">
+                          <span className="flex-shrink-0 text-[10px] font-bold bg-coral/10 text-coral px-2 py-0.5 rounded-full">
+                            {s.day}
+                          </span>
+                          <span className="text-xs text-brand-dark font-medium truncate">{s.label}</span>
+                          <span className="text-[10px] text-brand-secondary ml-auto flex-shrink-0">{s.time}</span>
+                        </div>
                       ))}
                     </div>
                   </div>
