@@ -20,54 +20,19 @@ const I18N_KEYS: Record<TourCategory, string> = {
 }
 
 const HOTELS: Hotel[] = [
-  {
-    id: 'h1',
-    names: ['Oxarima', 'Misuri', 'Amaia'],
-    type: 'Hospedaje',
-    location: '2-5 cuadras de la Plaza',
-    amenities: ['cochera', 'pet'],
-    prices: { '2d1n': 349, '3d2n': 449, '4d3n': 549 },
-  },
-  {
-    id: 'h2',
-    names: ['Panduro', 'Yanachaga'],
-    type: 'Hospedaje',
-    location: '5 cuadras de la Plaza',
-    amenities: ['cochera'],
-    prices: { '2d1n': 379, '3d2n': 479, '4d3n': 579 },
-  },
-  {
-    id: 'h3',
-    names: ['Chimi'],
-    type: 'Hospedaje',
-    location: '1 cuadra de la Plaza',
-    amenities: [],
-    prices: { '2d1n': 399, '3d2n': 499, '4d3n': 599 },
-  },
-  {
-    id: 'h4',
-    names: ['Chimi House'],
-    type: 'Hotel',
-    location: '1.4 km de la Plaza',
-    amenities: ['piscina', 'cochera'],
-    prices: { '2d1n': 449, '3d2n': 549, '4d3n': 649 },
-  },
-  {
-    id: 'h5',
-    names: ['Tunki Lodge', "D'palo", 'Esperanza'],
-    type: 'Hotel / Cabaña',
-    location: 'Frente o cerca a la Plaza',
-    amenities: ['piscina', 'desayuno', 'cochera'],
-    prices: { '2d1n': 499, '3d2n': 599, '4d3n': 699 },
-  },
-  {
-    id: 'h6',
-    names: ['Hassinger', 'Casa Oxapampina', 'Biosfera Lodge'],
-    type: 'Hotel / Cabaña',
-    location: '1.7–2.7 km de la Plaza',
-    amenities: ['piscina', 'desayuno', 'cochera'],
-    prices: { '2d1n': 549, '3d2n': 649, '4d3n': 749 },
-  },
+  { id: 'h1',  name: 'Oxarima',          type: 'Hospedaje',      location: 'A 2 cuadras de la Plaza',    amenities: ['cochera', 'pet'],                    prices: { '2d1n': 349, '3d2n': 449, '4d3n': 549 } },
+  { id: 'h2',  name: 'Misuri',           type: 'Hospedaje',      location: 'A 3 cuadras de la Plaza',    amenities: [],                                    prices: { '2d1n': 349, '3d2n': 449, '4d3n': 549 } },
+  { id: 'h3',  name: 'Amaia',            type: 'Hospedaje',      location: 'A 5 cuadras de la Plaza',    amenities: [],                                    prices: { '2d1n': 349, '3d2n': 449, '4d3n': 549 } },
+  { id: 'h4',  name: 'Panduro',          type: 'Hospedaje',      location: 'A 5 cuadras de la Plaza',    amenities: [],                                    prices: { '2d1n': 379, '3d2n': 479, '4d3n': 579 } },
+  { id: 'h5',  name: 'Yanachaga',        type: 'Hospedaje',      location: 'A 5 cuadras de la Plaza',    amenities: ['cochera'],                           prices: { '2d1n': 379, '3d2n': 479, '4d3n': 579 } },
+  { id: 'h6',  name: 'Chimi',            type: 'Hospedaje',      location: 'A 1 cuadra de la Plaza',     amenities: [],                                    prices: { '2d1n': 399, '3d2n': 499, '4d3n': 599 } },
+  { id: 'h7',  name: 'Chimi House',      type: 'Hotel',          location: 'A 1.4 km de la Plaza',       amenities: ['piscina', 'cochera'],                prices: { '2d1n': 449, '3d2n': 549, '4d3n': 649 } },
+  { id: 'h8',  name: 'Tunki Lodge',      type: 'Hotel',          location: 'Frente a la Plaza',          amenities: ['piscina', 'desayuno', 'pet'],        prices: { '2d1n': 499, '3d2n': 599, '4d3n': 699 } },
+  { id: 'h9',  name: "D'palo",           type: 'Cabañas',        location: 'A 4 cuadras de la Plaza',    amenities: ['piscina', 'desayuno', 'cochera'],    prices: { '2d1n': 499, '3d2n': 599, '4d3n': 699 } },
+  { id: 'h10', name: 'Esperanza',        type: 'Hotel',          location: 'A 3 cuadras de la Plaza',    amenities: ['piscina', 'desayuno', 'cochera'],    prices: { '2d1n': 499, '3d2n': 599, '4d3n': 699 } },
+  { id: 'h11', name: 'Hassinger',        type: 'Hotel',          location: 'A 1.7 km de la Plaza',       amenities: ['piscina', 'desayuno', 'cochera'],    prices: { '2d1n': 549, '3d2n': 649, '4d3n': 749 } },
+  { id: 'h12', name: 'Casa Oxapampina',  type: 'Hotel / Cabaña', location: 'A 2.7 km de la Plaza',       amenities: ['piscina', 'desayuno', 'cochera'],    prices: { '2d1n': 549, '3d2n': 649, '4d3n': 749 } },
+  { id: 'h13', name: 'Biosfera Lodge',   type: 'Hotel / Cabaña', location: 'A 2.1 km de la Plaza',       amenities: ['cochera'],                           prices: { '2d1n': 549, '3d2n': 649, '4d3n': 749 } },
 ]
 
 const PACKAGES: Package[] = [
