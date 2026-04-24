@@ -36,7 +36,7 @@ export default function HotelSelectorModal({
   return (
     <AnimatePresence>
       {open && (
-        <>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           {/* Backdrop */}
           <motion.div
             key="backdrop"
@@ -45,17 +45,17 @@ export default function HotelSelectorModal({
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             onClick={onClose}
-            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
           />
 
-          {/* Panel */}
+          {/* Modal */}
           <motion.div
-            key="panel"
-            initial={{ opacity: 0, y: 60 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 40 }}
-            transition={{ type: 'spring', damping: 28, stiffness: 300 }}
-            className="fixed inset-x-0 bottom-0 md:inset-x-auto md:left-1/2 md:-translate-x-1/2 md:top-8 md:bottom-8 md:w-full md:max-w-2xl z-50 flex flex-col bg-white rounded-t-3xl md:rounded-3xl shadow-2xl overflow-hidden"
+            key="modal"
+            initial={{ opacity: 0, scale: 0.94, y: 16 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.94, y: 8 }}
+            transition={{ type: 'spring', damping: 26, stiffness: 320 }}
+            className="relative z-10 w-full max-w-lg max-h-[85vh] flex flex-col bg-white rounded-3xl shadow-2xl overflow-hidden"
           >
             {/* Header */}
             <div className="flex-shrink-0 flex items-center justify-between px-6 py-5 border-b border-brand-border">
@@ -69,14 +69,14 @@ export default function HotelSelectorModal({
               </div>
               <button
                 onClick={onClose}
-                className="w-9 h-9 rounded-full bg-sand hover:bg-brand-border flex items-center justify-center transition-colors"
+                className="w-9 h-9 rounded-full bg-sand hover:bg-brand-border flex items-center justify-center transition-colors flex-shrink-0"
               >
                 <X className="w-5 h-5 text-brand-secondary" />
               </button>
             </div>
 
             {/* Legend */}
-            <div className="flex-shrink-0 flex items-center gap-4 px-6 py-3 bg-sand border-b border-brand-border text-xs text-brand-secondary flex-wrap">
+            <div className="flex-shrink-0 flex items-center gap-4 px-6 py-2.5 bg-sand border-b border-brand-border text-xs text-brand-secondary flex-wrap">
               {Object.entries(AMENITY_CONFIG).map(([key, { icon: Icon, label, color }]) => (
                 <span key={key} className="flex items-center gap-1">
                   <Icon className={`w-3.5 h-3.5 ${color}`} />
@@ -85,9 +85,8 @@ export default function HotelSelectorModal({
               ))}
             </div>
 
-            {/* Hotel list */}
+            {/* Hotel list — scrollable */}
             <div className="flex-1 overflow-y-auto">
-              {/* Type groups */}
               {(['Hospedaje', 'Hotel', 'Cabañas', 'Hotel / Cabaña'] as const).map((type) => {
                 const group = hotels.filter((h) => h.type === type)
                 if (!group.length) return null
@@ -107,7 +106,7 @@ export default function HotelSelectorModal({
                             key={hotel.id}
                             onClick={() => handlePick(hotel)}
                             whileTap={{ scale: 0.98 }}
-                            className={`w-full text-left rounded-2xl px-4 py-3.5 border-2 transition-all duration-150 ${
+                            className={`w-full text-left rounded-2xl px-4 py-3 border-2 transition-all duration-150 ${
                               isSelected
                                 ? 'border-coral bg-coral/5'
                                 : 'border-transparent hover:border-brand-border bg-sand hover:bg-white'
@@ -125,26 +124,18 @@ export default function HotelSelectorModal({
                                   <MapPin className="w-3 h-3 flex-shrink-0" />
                                   {hotel.location}
                                 </p>
-
-                                {/* Amenity icons */}
-                                <div className="flex items-center gap-3 mt-2">
+                                <div className="flex items-center gap-3 mt-1.5">
                                   {(Object.keys(AMENITY_CONFIG) as Array<keyof typeof AMENITY_CONFIG>).map((key) => {
                                     const { icon: Icon, label, color } = AMENITY_CONFIG[key]
                                     const has = hotel.amenities.includes(key)
                                     return (
-                                      <span
-                                        key={key}
-                                        title={label}
-                                        className={has ? color : 'text-brand-border'}
-                                      >
+                                      <span key={key} title={label} className={has ? color : 'text-brand-border'}>
                                         <Icon className="w-4 h-4" />
                                       </span>
                                     )
                                   })}
                                 </div>
                               </div>
-
-                              {/* Price */}
                               <div className="flex-shrink-0 text-right">
                                 <p className={`text-xl font-bold ${isSelected ? 'text-coral' : 'text-brand-dark'}`}>
                                   S/. {price}
@@ -168,15 +159,12 @@ export default function HotelSelectorModal({
                 <p className="text-xs text-brand-secondary">Seleccionado</p>
                 <p className="text-sm font-bold text-brand-dark">{selected.name}</p>
               </div>
-              <button
-                onClick={onClose}
-                className="btn-primary text-sm px-6 py-2.5"
-              >
+              <button onClick={onClose} className="btn-primary text-sm px-6 py-2.5">
                 Confirmar · S/. {selected.prices[pkgId]}
               </button>
             </div>
           </motion.div>
-        </>
+        </div>
       )}
     </AnimatePresence>
   )
