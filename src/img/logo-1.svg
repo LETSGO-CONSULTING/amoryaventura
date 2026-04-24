@@ -1,0 +1,22 @@
+<svg width="220" height="80" viewBox="0 0 220 80" xmlns="http://www.w3.org/2000/svg">
+  <rect width="220" height="80" fill="#ffffff"/>
+
+  <!-- Montaña -->
+  <polygon points="40,60 70,20 100,60" fill="#2E8B57"/>
+
+  <!-- Camino -->
+  <path d="M70 60 Q75 45 80 60" stroke="#F4A261" stroke-width="3" fill="none"/>
+
+  <!-- Corazón -->
+  <path d="M130 35 
+           C130 25, 145 25, 145 35
+           C145 25, 160 25, 160 35
+           C160 50, 145 60, 145 60
+           C145 60, 130 50, 130 35"
+        fill="#E63946"/>
+
+  <!-- Texto -->
+  <text x="20" y="75" font-size="14" fill="#264653" font-family="Arial, sans-serif">
+    Amor y Aventura
+  </text>
+</svg>
