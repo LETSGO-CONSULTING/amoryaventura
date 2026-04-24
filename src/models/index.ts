@@ -90,3 +90,14 @@ export interface CartItem {
   product: Product
   quantity: number
 }
+
+export type AttractionZone = 'Todos' | 'Oxapampa' | 'Pozuzo' | 'Villa Rica' | 'Perené'
+
+export interface Attraction {
+  id: string
+  name: string
+  zone: Exclude<AttractionZone, 'Todos'>
+  image: string
+  description: string
+  tag: string
+}

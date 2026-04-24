@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { MapPin, ArrowRight, Clock } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { destinations } from '@/mocks/destinations'
+import { attractions } from '@/mocks/attractions'
+import type { AttractionZone } from '@/models'
 
 const ZONES = [
   { id: 'Oxapampa', label: 'Oxapampa', status: 'active' as const },
@@ -10,12 +12,32 @@ const ZONES = [
   { id: 'Pucallpa', label: 'Pucallpa', status: 'coming_soon' as const },
 ]
 
+const SUB_ZONES: AttractionZone[] = ['Todos', 'Oxapampa', 'Pozuzo', 'Villa Rica', 'Perené']
+
+const TAG_COLORS: Record<string, string> = {
+  Catarata:    'bg-blue-500/20 text-blue-200',
+  Laguna:      'bg-cyan-500/20 text-cyan-200',
+  Río:         'bg-sky-500/20 text-sky-200',
+  Cultura:     'bg-amber-500/20 text-amber-200',
+  Historia:    'bg-orange-500/20 text-orange-200',
+  Naturaleza:  'bg-green-500/20 text-green-200',
+  Pueblo:      'bg-rose-500/20 text-rose-200',
+  Ícono:       'bg-coral/20 text-coral',
+  Gastronomía: 'bg-yellow-500/20 text-yellow-200',
+  Café:        'bg-amber-700/20 text-amber-300',
+}
+
 export default function DestinationsSection() {
   const { t } = useTranslation()
   const [activeZone, setActiveZone] = useState('Oxapampa')
+  const [activeSub, setActiveSub] = useState<AttractionZone>('Todos')
 
   const isComingSoon = ZONES.find((z) => z.id === activeZone)?.status === 'coming_soon'
-  const filtered = destinations.filter((d) => d.zone === activeZone)
+  const comingSoonDest = destinations.find((d) => d.zone === activeZone)
+
+  const filteredAttractions = activeSub === 'Todos'
+    ? attractions
+    : attractions.filter((a) => a.zone === activeSub)
 
   return (
     <section id="destinos" className="section-padding bg-warm">
@@ -87,7 +109,7 @@ export default function DestinationsSection() {
           })}
         </motion.div>
 
-        {/* Coming soon overlay */}
+        {/* Content */}
         <AnimatePresence mode="wait">
           {isComingSoon ? (
             <motion.div
@@ -98,10 +120,9 @@ export default function DestinationsSection() {
               transition={{ duration: 0.3 }}
               className="relative overflow-hidden rounded-3xl"
             >
-              {/* Background image blurred */}
               <div className="relative h-72 md:h-96">
                 <img
-                  src={filtered[0]?.image}
+                  src={comingSoonDest?.image}
                   alt={activeZone}
                   className="w-full h-full object-cover brightness-50 blur-sm scale-105"
                 />
@@ -119,7 +140,7 @@ export default function DestinationsSection() {
                     </div>
                     <h3 className="text-white text-3xl font-bold mb-2">{activeZone}</h3>
                     <p className="text-white/70 text-sm leading-relaxed mb-5">
-                      {filtered[0]?.description ?? 'Muy pronto operaremos en este destino.'}
+                      {comingSoonDest?.description ?? 'Muy pronto operaremos en este destino.'}
                     </p>
                     <a
                       href={`https://wa.me/51928686294?text=${encodeURIComponent(`Hola! Me interesa saber cuándo habrá tours a *${activeZone}*. ¿Cuándo empiezan?`)}`}
@@ -136,50 +157,85 @@ export default function DestinationsSection() {
             </motion.div>
           ) : (
             <motion.div
-              key={activeZone}
+              key="oxapampa-attractions"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.25 }}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
             >
-              {filtered.map((dest, i) => (
+              {/* Sub-zone filter */}
+              <div className="flex justify-center gap-2 mb-8 flex-wrap">
+                {SUB_ZONES.map((sub) => (
+                  <button
+                    key={sub}
+                    onClick={() => setActiveSub(sub)}
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                      activeSub === sub
+                        ? 'bg-brand-dark text-white shadow-sm'
+                        : 'bg-white text-brand-secondary border border-brand-border hover:border-brand-dark hover:text-brand-dark'
+                    }`}
+                  >
+                    {sub}
+                  </button>
+                ))}
+              </div>
+
+              {/* Attractions grid */}
+              <AnimatePresence mode="wait">
                 <motion.div
-                  key={dest.id}
-                  initial={{ opacity: 0, y: 30 }}
+                  key={activeSub}
+                  initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.07 }}
-                  className={`group relative overflow-hidden rounded-2xl cursor-pointer ${
-                    i === 0 ? 'sm:col-span-2 aspect-[3/2]' : 'aspect-[4/3]'
-                  }`}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.2 }}
+                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"
                 >
-                  <img
-                    src={dest.image}
-                    alt={dest.name}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                  {filteredAttractions.map((attraction, i) => (
+                    <motion.div
+                      key={attraction.id}
+                      initial={{ opacity: 0, y: 24 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.06 }}
+                      className="group relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer"
+                    >
+                      <img
+                        src={attraction.image}
+                        alt={attraction.name}
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                      {/* Gradient overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-                  <div className="absolute top-4 left-4">
-                    <span className="bg-white/20 backdrop-blur-sm border border-white/30 text-white text-xs font-medium px-3 py-1 rounded-full">
-                      {dest.toursCount} {dest.toursCount === 1 ? 'tour' : 'tours'}
-                    </span>
-                  </div>
+                      {/* Tag */}
+                      <div className="absolute top-3 left-3">
+                        <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full ${TAG_COLORS[attraction.tag] ?? 'bg-white/20 text-white'}`}>
+                          {attraction.tag}
+                        </span>
+                      </div>
 
-                  <div className="absolute bottom-0 left-0 right-0 p-5">
-                    <div className="flex items-center gap-1.5 text-white/70 text-xs mb-1">
-                      <MapPin className="w-3 h-3" />
-                      <span>{dest.region}</span>
-                    </div>
-                    <h3 className="text-white text-xl font-bold mb-1 leading-tight">{dest.name}</h3>
-                    <p className="text-white/60 text-xs leading-snug line-clamp-2 mb-3">{dest.description}</p>
-                    <div className="flex items-center gap-2 text-coral text-sm font-medium opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-                      <span>{t('destinations.explore')}</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </div>
-                  </div>
+                      {/* Sub-zone badge (only when showing Todos) */}
+                      {activeSub === 'Todos' && (
+                        <div className="absolute top-3 right-3">
+                          <span className="text-[10px] font-semibold px-2 py-1 rounded-full bg-black/40 backdrop-blur-sm text-white/80 flex items-center gap-1">
+                            <MapPin className="w-2.5 h-2.5" />
+                            {attraction.zone}
+                          </span>
+                        </div>
+                      )}
+
+                      {/* Content */}
+                      <div className="absolute bottom-0 left-0 right-0 p-4">
+                        <h3 className="text-white text-base font-bold leading-tight mb-1">
+                          {attraction.name}
+                        </h3>
+                        <p className="text-white/60 text-xs leading-snug line-clamp-2 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                          {attraction.description}
+                        </p>
+                      </div>
+                    </motion.div>
+                  ))}
                 </motion.div>
-              ))}
+              </AnimatePresence>
             </motion.div>
           )}
         </AnimatePresence>
