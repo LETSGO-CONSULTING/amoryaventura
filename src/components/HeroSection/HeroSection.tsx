@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { MapPin, ChevronDown, ShoppingBag } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
-const HERO_IMG = 'https://images.unsplash.com/photo-1526392060635-9d6019884377?w=1920&auto=format&fit=crop&q=80'
+const HERO_IMG = 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1920&auto=format&fit=crop&q=80'
 const WHATSAPP_NUMBER = '51928686294'
 
 const fadeUp = (delay = 0) => ({
