@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { CheckCircle2, MessageCircle, Sparkles, Waves, Coffee, Car, PawPrint, MapPin, Building2 } from 'lucide-react'
 import HotelSelectorModal from './HotelSelectorModal'
+import BookingFormModal, { type BookingData } from './BookingFormModal'
 
 export interface Hotel {
   id: string
@@ -41,12 +42,20 @@ interface Props {
 export default function PackageCard({ pkg, hotels, index }: Props) {
   const [selectedHotel, setSelectedHotel] = useState<Hotel>(hotels[0])
   const [modalOpen, setModalOpen] = useState(false)
+  const [bookingOpen, setBookingOpen] = useState(false)
 
   const price = selectedHotel.prices[pkg.id]
 
-  const handleWA = () => {
-    const msg = pkg.msg(selectedHotel.name, price)
+  const handleWA = (data: BookingData) => {
+    const date = new Date(data.date + 'T12:00:00').toLocaleDateString('es-PE', {
+      weekday: 'long', day: 'numeric', month: 'long', year: 'numeric',
+    })
+    const pax = `${data.adults} adulto${data.adults !== 1 ? 's' : ''}${data.children > 0 ? ` y ${data.children} niño${data.children !== 1 ? 's' : ''}` : ''}`
+    const obs = data.observations ? `\n📝 *Observaciones:* ${data.observations}` : ''
+    const base = pkg.msg(selectedHotel.name, price)
+    const msg = `${base}\n\n📅 *Fecha:* ${date}\n👥 *Personas:* ${pax}${obs}`
     window.open(`https://wa.me/51928686294?text=${encodeURIComponent(msg)}`, '_blank')
+    setBookingOpen(false)
   }
 
   return (
@@ -162,7 +171,7 @@ export default function PackageCard({ pkg, hotels, index }: Props) {
 
           {/* CTA */}
           <button
-            onClick={handleWA}
+            onClick={() => setBookingOpen(true)}
             className="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-semibold py-3.5 rounded-2xl transition-all duration-200 hover:scale-[1.02] hover:shadow-lg shadow-[#25D366]/20 text-sm"
           >
             <MessageCircle className="w-5 h-5" />
@@ -179,6 +188,13 @@ export default function PackageCard({ pkg, hotels, index }: Props) {
         selected={selectedHotel}
         onSelect={setSelectedHotel}
         onClose={() => setModalOpen(false)}
+      />
+
+      <BookingFormModal
+        open={bookingOpen}
+        tourName={`${pkg.name} · ${pkg.duration}`}
+        onClose={() => setBookingOpen(false)}
+        onConfirm={handleWA}
       />
     </>
   )

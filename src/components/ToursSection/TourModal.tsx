@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   X,
@@ -13,6 +13,7 @@ import {
   MessageCircle,
 } from 'lucide-react'
 import type { Tour } from '@/models'
+import BookingFormModal, { type BookingData } from './BookingFormModal'
 
 interface Props {
   tour: Tour | null
@@ -22,23 +23,32 @@ interface Props {
 const WHATSAPP = '+51928686294'
 
 export default function TourModal({ tour, onClose }: Props) {
+  const [bookingOpen, setBookingOpen] = useState(false)
+
   useEffect(() => {
     if (tour) {
       document.body.style.overflow = 'hidden'
     } else {
       document.body.style.overflow = ''
+      setBookingOpen(false)
     }
     return () => {
       document.body.style.overflow = ''
     }
   }, [tour])
 
-  const handleWhatsApp = () => {
+  const handleWhatsApp = (data: BookingData) => {
     if (!tour) return
+    const date = new Date(data.date + 'T12:00:00').toLocaleDateString('es-PE', {
+      weekday: 'long', day: 'numeric', month: 'long', year: 'numeric',
+    })
+    const pax = `${data.adults} adulto${data.adults !== 1 ? 's' : ''}${data.children > 0 ? ` y ${data.children} niño${data.children !== 1 ? 's' : ''}` : ''}`
+    const obs = data.observations ? `\n📝 *Observaciones:* ${data.observations}` : ''
     const msg = encodeURIComponent(
-      `Hola! Me interesa reservar el *${tour.title}* para el próximo fin de semana. ¿Tienen disponibilidad?`
+      `Hola! Me interesa reservar el *${tour.title}*.\n\n📅 *Fecha:* ${date}\n👥 *Personas:* ${pax}${obs}\n\n¿Tienen disponibilidad?`
     )
     window.open(`https://wa.me/${WHATSAPP}?text=${msg}`, '_blank')
+    setBookingOpen(false)
   }
 
   return (
@@ -213,7 +223,7 @@ export default function TourModal({ tour, onClose }: Props) {
                 </p>
               </div>
               <button
-                onClick={handleWhatsApp}
+                onClick={() => setBookingOpen(true)}
                 className="flex items-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-semibold px-6 py-3 rounded-full transition-all duration-200 hover:scale-105 hover:shadow-lg shadow-[#25D366]/30 text-sm flex-shrink-0"
               >
                 <MessageCircle className="w-5 h-5" />
@@ -221,6 +231,13 @@ export default function TourModal({ tour, onClose }: Props) {
               </button>
             </div>
           </motion.div>
+
+          <BookingFormModal
+            open={bookingOpen}
+            tourName={tour.title}
+            onClose={() => setBookingOpen(false)}
+            onConfirm={handleWhatsApp}
+          />
         </>
       )}
     </AnimatePresence>
