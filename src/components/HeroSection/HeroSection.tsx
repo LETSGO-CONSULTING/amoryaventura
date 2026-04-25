@@ -1,8 +1,39 @@
-import { motion } from 'framer-motion'
+import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { MapPin, ChevronDown, ShoppingBag } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
-const HERO_IMG = 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1920&auto=format&fit=crop&q=80'
+const SLIDES = [
+  {
+    image: 'https://images.unsplash.com/photo-1504457047772-27faf1c00561?w=1920&auto=format&fit=crop&q=80',
+    label: 'Oxapampa',
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1455218873509-8097305ee378?w=1920&auto=format&fit=crop&q=80',
+    label: 'Pozuzo',
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=1920&auto=format&fit=crop&q=80',
+    label: 'Perené · Cataratas',
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1920&auto=format&fit=crop&q=80',
+    label: 'Selva Amazónica',
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1920&auto=format&fit=crop&q=80',
+    label: 'Tarapoto',
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1920&auto=format&fit=crop&q=80',
+    label: 'Villa Rica · Café',
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1468818438311-4bab781ab9b8?w=1920&auto=format&fit=crop&q=80',
+    label: 'Pucallpa · Amazonía',
+  },
+]
+
 const WHATSAPP_NUMBER = '51928686294'
 
 const fadeUp = (delay = 0) => ({
@@ -13,18 +44,62 @@ const fadeUp = (delay = 0) => ({
 
 export default function HeroSection() {
   const { t } = useTranslation()
+  const [current, setCurrent] = useState(0)
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % SLIDES.length)
+    }, 5000)
+    return () => clearInterval(id)
+  }, [])
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background */}
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105"
-        style={{ backgroundImage: `url(${HERO_IMG})` }}
-      />
+      {/* Slideshow backgrounds */}
+      <AnimatePresence>
+        <motion.div
+          key={current}
+          initial={{ opacity: 0, scale: 1.08 }}
+          animate={{ opacity: 1, scale: 1.03 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.2, ease: 'easeInOut' }}
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${SLIDES[current].image})` }}
+        />
+      </AnimatePresence>
+
       <div className="absolute inset-0 bg-gradient-hero" />
 
       {/* Noise texture overlay */}
       <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23n)\'/%3E%3C/svg%3E")' }} />
+
+      {/* Destination label */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={`label-${current}`}
+          initial={{ opacity: 0, x: -10 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: 10 }}
+          transition={{ duration: 0.4 }}
+          className="absolute bottom-20 left-6 z-10 flex items-center gap-2 bg-black/30 backdrop-blur-sm border border-white/15 rounded-full px-4 py-2"
+        >
+          <MapPin className="w-3.5 h-3.5 text-coral flex-shrink-0" />
+          <span className="text-white/90 text-xs font-medium">{SLIDES[current].label}</span>
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Slide dots */}
+      <div className="absolute bottom-20 right-6 z-10 flex gap-1.5">
+        {SLIDES.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setCurrent(i)}
+            className={`h-1.5 rounded-full transition-all duration-300 ${
+              i === current ? 'w-6 bg-coral' : 'w-1.5 bg-white/40'
+            }`}
+          />
+        ))}
+      </div>
 
       {/* Content */}
       <div className="relative z-10 container-base text-center px-6">
