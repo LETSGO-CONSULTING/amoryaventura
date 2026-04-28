@@ -67,7 +67,7 @@ export default function CheckoutPage() {
 
   if (items.length === 0 && step !== 'success') {
     return (
-      <div className="min-h-screen bg-sand/20 flex flex-col items-center justify-center text-gray-400 px-4">
+      <div className="min-h-screen bg-sand/20 flex flex-col items-center justify-center text-gray-400 px-4 pt-16 md:pt-20">
         <p className="text-lg font-medium text-gray-700 mb-4">Tu carrito está vacío</p>
         <a href="/tienda" className="bg-coral text-white px-6 py-3 rounded-xl font-semibold hover:bg-terracota transition-colors">
           Ver tienda
@@ -126,7 +126,7 @@ export default function CheckoutPage() {
 
   if (step === 'success' && order) {
     return (
-      <div className="min-h-screen bg-sand/20 flex flex-col items-center justify-center px-4">
+      <div className="min-h-screen bg-sand/20 flex flex-col items-center justify-center px-4 pt-16 md:pt-20">
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -170,7 +170,7 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="min-h-screen bg-sand/20">
+    <div className="min-h-screen bg-sand/20 pt-16 md:pt-20">
       <div className="max-w-5xl mx-auto px-4 py-8">
         <a href="/carrito" className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-coral transition-colors mb-6">
           <ArrowLeft size={14} />

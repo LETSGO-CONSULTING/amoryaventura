@@ -8,7 +8,7 @@ export default function CartPage() {
 
   if (items.length === 0) {
     return (
-      <div className="min-h-screen bg-sand/20 flex flex-col items-center justify-center text-gray-400 px-4">
+      <div className="min-h-screen bg-sand/20 flex flex-col items-center justify-center text-gray-400 px-4 pt-16 md:pt-20">
         <ShoppingBag size={64} className="mb-4 opacity-20" />
         <h2 className="text-xl font-semibold text-gray-700 mb-2">Tu carrito está vacío</h2>
         <p className="text-sm mb-6 text-center">Agrega productos desde nuestra tienda</p>
@@ -21,7 +21,7 @@ export default function CartPage() {
   }
 
   return (
-    <div className="min-h-screen bg-sand/20">
+    <div className="min-h-screen bg-sand/20 pt-16 md:pt-20">
       <div className="max-w-5xl mx-auto px-4 py-8">
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-bold text-gray-900">Tu carrito</h1>
