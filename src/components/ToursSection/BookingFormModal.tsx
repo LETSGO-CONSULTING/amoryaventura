@@ -67,7 +67,7 @@ export default function BookingFormModal({ open, tourName, onClose, onConfirm }:
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 40, scale: 0.97 }}
             transition={{ type: 'spring', damping: 28, stiffness: 320 }}
-            className="fixed inset-x-0 bottom-0 md:inset-x-auto md:left-1/2 md:-translate-x-1/2 md:top-auto md:bottom-8 md:w-full md:max-w-md z-[60] bg-white rounded-t-3xl md:rounded-3xl shadow-2xl overflow-hidden max-h-[92dvh] flex flex-col"
+            className="fixed inset-x-0 bottom-0 max-h-[90svh] md:inset-x-auto md:left-1/2 md:-translate-x-1/2 md:top-auto md:bottom-8 md:max-h-none md:w-full md:max-w-md z-[60] bg-white rounded-t-3xl md:rounded-3xl shadow-2xl overflow-hidden flex flex-col"
           >
             {/* Header */}
             <div className="flex items-center justify-between px-5 pt-5 pb-4 border-b border-brand-border flex-shrink-0">
@@ -83,7 +83,7 @@ export default function BookingFormModal({ open, tourName, onClose, onConfirm }:
               </button>
             </div>
 
-            <div className="overflow-y-auto flex-1">
+            <div className="flex-1 overflow-y-auto min-h-0">
               <div className="p-5 space-y-5">
                 {/* Date */}
                 <div>
