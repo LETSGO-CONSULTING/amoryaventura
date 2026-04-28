@@ -30,7 +30,7 @@ const NEXT_STATUS: Record<string, string> = {
 
 // Product form modal
 type ProductFormData = {
-  name: string; category: string; image: string; price: string; originalPrice: string;
+  name: string; category: ProductCategory; image: string; price: string; originalPrice: string;
   description: string; region: string; stock: string; isNew: boolean; isFeatured: boolean;
 }
 
@@ -144,7 +144,7 @@ function ProductModal({ product, onClose, onSave }: {
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Categoría</label>
-              <select value={form.category} onChange={e => setForm(f => ({ ...f, category: e.target.value }))}
+              <select value={form.category} onChange={e => setForm(f => ({ ...f, category: e.target.value as ProductCategory }))}
                 className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-coral/30 bg-white">
                 {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
               </select>
