@@ -28,7 +28,7 @@ export default function Header() {
   const navLinks = [
     { label: t('header.destinations'), href: '#destinos' },
     { label: t('header.tours'), href: '#tours' },
-    { label: t('header.shop'), href: '#tienda' },
+    { label: t('header.shop'), href: '/tienda', isRoute: true },
     { label: t('header.gallery'), href: '#galeria' },
   ]
 
@@ -59,23 +59,36 @@ export default function Header() {
 
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-1">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all hover:bg-coral/10 hover:text-coral ${
-                  isLight ? 'text-white/90' : 'text-brand-secondary'
-                }`}
-              >
-                {link.label}
-              </a>
-            ))}
+            {navLinks.map((link) =>
+              link.isRoute ? (
+                <Link
+                  key={link.href}
+                  to={link.href}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all hover:bg-coral/10 hover:text-coral ${
+                    isLight ? 'text-white/90' : 'text-brand-secondary'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all hover:bg-coral/10 hover:text-coral ${
+                    isLight ? 'text-white/90' : 'text-brand-secondary'
+                  }`}
+                >
+                  {link.label}
+                </a>
+              )
+            )}
           </nav>
 
           {/* Right actions */}
           <div className="hidden md:flex items-center gap-3">
             <LanguageSwitcher isLight={isLight} />
-            <button
+            <Link
+              to="/carrito"
               className={`relative p-2 rounded-full transition-all hover:bg-coral/10 ${isLight ? 'text-white' : 'text-brand-secondary'}`}
               aria-label={t('header.cart')}
             >
@@ -85,7 +98,7 @@ export default function Header() {
                   {totalItems}
                 </span>
               )}
-            </button>
+            </Link>
             <a
               href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hola, quiero información sobre tours`}
               target="_blank"
@@ -98,14 +111,14 @@ export default function Header() {
 
           {/* Mobile toggle */}
           <div className="md:hidden flex items-center gap-2">
-            <button className={`relative p-2 ${isLight && !mobileOpen ? 'text-white' : 'text-brand-dark'}`}>
+            <Link to="/carrito" className={`relative p-2 ${isLight && !mobileOpen ? 'text-white' : 'text-brand-dark'}`}>
               <ShoppingCart className="w-5 h-5" />
               {totalItems > 0 && (
                 <span className="absolute -top-1 -right-1 w-4 h-4 bg-coral text-white text-xs font-bold rounded-full flex items-center justify-center">
                   {totalItems}
                 </span>
               )}
-            </button>
+            </Link>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               className={`p-2 ${isLight && !mobileOpen ? 'text-white' : 'text-brand-dark'}`}
