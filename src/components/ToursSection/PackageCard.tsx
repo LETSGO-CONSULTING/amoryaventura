@@ -47,13 +47,18 @@ export default function PackageCard({ pkg, hotels, index }: Props) {
   const price = selectedHotel.prices[pkg.id]
 
   const handleWA = (data: BookingData) => {
-    const date = new Date(data.date + 'T12:00:00').toLocaleDateString('es-PE', {
-      weekday: 'long', day: 'numeric', month: 'long', year: 'numeric',
-    })
+    const fmt = (iso: string) =>
+      new Date(iso + 'T12:00:00').toLocaleDateString('es-PE', {
+        weekday: 'long', day: 'numeric', month: 'long', year: 'numeric',
+      })
+    const dateStr =
+      data.dateStart === data.dateEnd
+        ? fmt(data.dateStart)
+        : `del ${fmt(data.dateStart)} al ${fmt(data.dateEnd)}`
     const pax = `${data.adults} adulto${data.adults !== 1 ? 's' : ''}${data.children > 0 ? ` y ${data.children} niño${data.children !== 1 ? 's' : ''}` : ''}`
     const obs = data.observations ? `\n📝 *Observaciones:* ${data.observations}` : ''
     const base = pkg.msg(selectedHotel.name, price)
-    const msg = `${base}\n\n📅 *Fecha:* ${date}\n👥 *Personas:* ${pax}${obs}`
+    const msg = `${base}\n\n📅 *Fecha:* ${dateStr}\n👥 *Personas:* ${pax}${obs}`
     window.open(`https://wa.me/51928686294?text=${encodeURIComponent(msg)}`, '_blank')
     setBookingOpen(false)
   }
