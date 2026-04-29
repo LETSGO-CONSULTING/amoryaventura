@@ -45,7 +45,7 @@ export default function Logo({
         alt="Amor y Aventura Tours"
         className={`
           object-contain flex-shrink-0
-          ${variant === 'icon' ? iconSizes.lg : iconSizes[size]}
+          ${iconSizes[size]}
           transition-transform duration-200 group-hover:scale-105
         `}
       />

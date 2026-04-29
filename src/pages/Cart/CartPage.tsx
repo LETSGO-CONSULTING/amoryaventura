@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { Minus, Plus, Trash2, ShoppingBag, ArrowRight, ArrowLeft } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useCartStore } from '@/store/cartStore'
@@ -5,6 +6,9 @@ import { useCartStore } from '@/store/cartStore'
 export default function CartPage() {
   const { items, removeItem, updateQuantity, totalPrice, clearCart } = useCartStore()
   const total = totalPrice()
+
+  // Scroll to top on every cart visit
+  useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' }) }, [])
 
   if (items.length === 0) {
     return (
@@ -22,7 +26,7 @@ export default function CartPage() {
 
   return (
     <div className="min-h-screen bg-sand/20">
-      <div className="max-w-5xl mx-auto px-4 py-8">
+      <div className="max-w-5xl mx-auto px-4 pt-24 pb-8 md:pt-28">
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-bold text-gray-900">Tu carrito</h1>
           <button onClick={clearCart} className="text-sm text-gray-400 hover:text-red-500 transition-colors">

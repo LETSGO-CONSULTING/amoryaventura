@@ -85,6 +85,7 @@ export default function Header() {
             <LanguageSwitcher isLight={isLight} />
             <Link
               to="/carrito"
+              onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}
               className={`relative p-2 rounded-full transition-all hover:bg-coral/10 ${isLight ? 'text-white' : 'text-brand-secondary'}`}
               aria-label={t('header.cart')}
             >
@@ -107,7 +108,7 @@ export default function Header() {
 
           {/* Mobile toggle */}
           <div className="md:hidden flex items-center gap-2">
-            <Link to="/carrito" className={`relative p-2 ${isLight && !mobileOpen ? 'text-white' : 'text-brand-dark'}`}>
+            <Link to="/carrito" onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })} className={`relative p-2 ${isLight && !mobileOpen ? 'text-white' : 'text-brand-dark'}`}>
               <ShoppingCart className="w-5 h-5" />
               {totalItems > 0 && (
                 <span className="absolute -top-1 -right-1 w-4 h-4 bg-coral text-white text-xs font-bold rounded-full flex items-center justify-center">
