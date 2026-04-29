@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Menu, X, ShoppingCart, Heart } from 'lucide-react'
+import { Menu, X, ShoppingCart } from 'lucide-react'
+import Logo from '@/components/Logo/Logo'
 import { useTranslation } from 'react-i18next'
 import { motion, AnimatePresence } from 'framer-motion'
 import LanguageSwitcher from '@/components/LanguageSwitcher/LanguageSwitcher'
@@ -45,16 +46,11 @@ export default function Header() {
       <div className="container-base">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group">
-            <div className="w-8 h-8 bg-coral rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-              <Heart className="w-4 h-4 text-white fill-white" />
-            </div>
-            <div className="flex flex-col leading-none">
-              <span className={`font-bold text-base transition-colors ${isLight ? 'text-white' : 'text-brand-dark'}`}>
-                Amor y
-              </span>
-              <span className="font-bold text-base text-coral">Aventura</span>
-            </div>
+          <Link to="/" className="group flex items-center">
+            {/* Mobile: icon only, large */}
+            <Logo variant="icon" size="md" light={isLight} className="md:hidden" />
+            {/* Desktop: icon + text */}
+            <Logo variant="horizontal" size="md" light={isLight} className="hidden md:flex" />
           </Link>
 
           {/* Desktop nav */}
