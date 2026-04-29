@@ -139,7 +139,7 @@ export default function StorePage() {
   return (
     <div className="min-h-screen bg-sand/20">
       {/* Page header */}
-      <div className="bg-white border-b border-sand/40">
+      <div className="bg-white border-b border-sand/40 pt-16 md:pt-20">
         <div className="max-w-7xl mx-auto px-4 py-6">
           <div className="flex items-center justify-between mb-4">
             <div>

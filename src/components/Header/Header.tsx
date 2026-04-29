@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Menu, X, ShoppingCart } from 'lucide-react'
 import Logo from '@/components/Logo/Logo'
 import { useTranslation } from 'react-i18next'
@@ -12,6 +12,7 @@ const WHATSAPP_NUMBER = '51928686294'
 export default function Header() {
   const { t } = useTranslation()
   const location = useLocation()
+  const navigate = useNavigate()
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const totalItems = useCartStore((s) => s.totalItems())
@@ -34,6 +35,16 @@ export default function Header() {
   ]
 
   const isLight = !scrolled && location.pathname === '/'
+
+  const handleAnchorNav = (anchor: string) => {
+    const id = anchor.replace('#', '')
+    if (location.pathname !== '/') {
+      navigate('/')
+      setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }), 350)
+    } else {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
 
   return (
     <header
@@ -67,15 +78,15 @@ export default function Header() {
                   {link.label}
                 </Link>
               ) : (
-                <a
+                <button
                   key={link.href}
-                  href={link.href}
+                  onClick={() => handleAnchorNav(link.href)}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all hover:bg-coral/10 hover:text-coral ${
                     isLight ? 'text-white/90' : 'text-brand-secondary'
                   }`}
                 >
                   {link.label}
-                </a>
+                </button>
               )
             )}
           </nav>
@@ -137,15 +148,25 @@ export default function Header() {
             className="md:hidden bg-white border-t border-brand-border overflow-hidden"
           >
             <div className="container-base py-6 flex flex-col gap-2">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="px-4 py-3 text-brand-dark font-medium rounded-xl hover:bg-sand transition-colors"
-                >
-                  {link.label}
-                </a>
-              ))}
+              {navLinks.map((link) =>
+                link.isRoute ? (
+                  <Link
+                    key={link.href}
+                    to={link.href}
+                    className="px-4 py-3 text-brand-dark font-medium rounded-xl hover:bg-sand transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                ) : (
+                  <button
+                    key={link.href}
+                    onClick={() => { setMobileOpen(false); handleAnchorNav(link.href) }}
+                    className="px-4 py-3 text-brand-dark font-medium rounded-xl hover:bg-sand transition-colors text-left"
+                  >
+                    {link.label}
+                  </button>
+                )
+              )}
               <div className="pt-2 flex items-center gap-3">
                 <LanguageSwitcher isLight={false} />
                 <a
