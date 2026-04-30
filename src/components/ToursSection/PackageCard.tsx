@@ -3,28 +3,10 @@ import { motion } from 'framer-motion'
 import { CheckCircle2, MessageCircle, Sparkles, Waves, Coffee, Car, PawPrint, MapPin, Building2 } from 'lucide-react'
 import HotelSelectorModal from './HotelSelectorModal'
 import BookingFormModal, { type BookingData } from './BookingFormModal'
+import type { Hotel, GroupPackage as Package } from '@/mocks/packages'
 
-export interface Hotel {
-  id: string
-  name: string
-  type: string
-  location: string
-  amenities: ('piscina' | 'desayuno' | 'cochera' | 'pet')[]
-  prices: Record<string, number>
-}
-
-export interface Package {
-  id: string
-  name: string
-  duration: string
-  badge: string
-  badgeColor: string
-  highlight: string
-  schedule: { day: string; label: string; time: string }[]
-  includes: string[]
-  msg: (hotel: string, price: number) => string
-  featured?: boolean
-}
+export type { Hotel }
+export type { Package }
 
 const AMENITY_ICONS = {
   piscina: { icon: Waves, label: 'Piscina', color: 'text-blue-400' },

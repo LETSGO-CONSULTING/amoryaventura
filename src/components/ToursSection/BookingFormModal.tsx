@@ -50,24 +50,22 @@ export default function BookingFormModal({ open, tourName, onClose, onConfirm }:
   return (
     <AnimatePresence>
       {open && (
-        <>
-          <motion.div
-            key="booking-backdrop"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            onClick={onClose}
-            className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm"
-          />
+        <motion.div
+          key="overlay"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[60] flex items-end md:items-center justify-center p-0 md:p-6"
+        >
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
 
           <motion.div
             key="booking-panel"
-            initial={{ opacity: 0, y: 60, scale: 0.97 }}
+            initial={{ opacity: 0, y: 40, scale: 0.97 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 40, scale: 0.97 }}
+            exit={{ opacity: 0, y: 20, scale: 0.97 }}
             transition={{ type: 'spring', damping: 28, stiffness: 320 }}
-            className="fixed inset-x-0 bottom-0 max-h-[90svh] md:inset-x-auto md:left-1/2 md:-translate-x-1/2 md:top-auto md:bottom-8 md:max-h-none md:w-full md:max-w-md z-[60] bg-white rounded-t-3xl md:rounded-3xl shadow-2xl overflow-hidden flex flex-col"
+            className="relative w-full max-h-[90svh] md:max-h-[85vh] md:w-[560px] bg-white rounded-t-3xl md:rounded-3xl shadow-2xl overflow-hidden flex flex-col"
           >
             {/* Header */}
             <div className="flex items-center justify-between px-5 pt-5 pb-4 border-b border-brand-border flex-shrink-0">
@@ -179,7 +177,7 @@ export default function BookingFormModal({ open, tourName, onClose, onConfirm }:
               </button>
             </div>
           </motion.div>
-        </>
+        </motion.div>
       )}
     </AnimatePresence>
   )

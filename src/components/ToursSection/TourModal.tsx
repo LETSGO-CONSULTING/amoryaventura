@@ -59,26 +59,22 @@ export default function TourModal({ tour, onClose }: Props) {
   return (
     <AnimatePresence>
       {tour && (
-        <>
-          {/* Backdrop */}
-          <motion.div
-            key="backdrop"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            onClick={onClose}
-            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
-          />
+        <motion.div
+          key="overlay"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-50 flex items-end md:items-center justify-center p-0 md:p-6"
+        >
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
 
-          {/* Panel */}
           <motion.div
             key="panel"
-            initial={{ opacity: 0, y: 60, scale: 0.97 }}
+            initial={{ opacity: 0, y: 40, scale: 0.97 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 40, scale: 0.97 }}
+            exit={{ opacity: 0, y: 20, scale: 0.97 }}
             transition={{ type: 'spring', damping: 28, stiffness: 320 }}
-            className="fixed inset-x-0 bottom-0 max-h-[92svh] md:inset-x-auto md:left-1/2 md:-translate-x-1/2 md:top-6 md:bottom-6 md:max-h-none md:w-full md:max-w-2xl z-50 flex flex-col bg-white rounded-t-3xl md:rounded-3xl shadow-2xl overflow-hidden"
+            className="relative w-full max-h-[92svh] md:max-h-[88vh] md:w-[800px] flex flex-col bg-white rounded-t-3xl md:rounded-3xl shadow-2xl overflow-hidden"
           >
             {/* Hero image */}
             <div className="relative h-52 md:h-64 flex-shrink-0">
@@ -243,7 +239,7 @@ export default function TourModal({ tour, onClose }: Props) {
             onClose={() => setBookingOpen(false)}
             onConfirm={handleWhatsApp}
           />
-        </>
+        </motion.div>
       )}
     </AnimatePresence>
   )

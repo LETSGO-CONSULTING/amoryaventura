@@ -4,6 +4,7 @@ import Home from '@/pages/Home/Home'
 import StorePage from '@/pages/Store/StorePage'
 import CartPage from '@/pages/Cart/CartPage'
 import CheckoutPage from '@/pages/Checkout/CheckoutPage'
+import PackagesPage from '@/pages/Packages/PackagesPage'
 import SellerLogin from '@/pages/Seller/SellerLogin'
 import SellerDashboard from '@/pages/Seller/SellerDashboard'
 import { useSellerStore } from '@/store/sellerStore'
@@ -21,6 +22,7 @@ export default function App() {
         {/* Public routes with main layout (header/footer) */}
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
+          <Route path="/paquetes" element={<PackagesPage />} />
           <Route path="/tienda" element={<StorePage />} />
           <Route path="/carrito" element={<CartPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />

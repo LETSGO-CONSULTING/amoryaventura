@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, MapPin, Waves, Coffee, Car, PawPrint, CheckCircle2 } from 'lucide-react'
-import type { Hotel } from './PackageCard'
+import type { Hotel } from '@/mocks/packages'
 
 const AMENITY_CONFIG = {
   piscina: { icon: Waves, label: 'Piscina', color: 'text-blue-400' },
@@ -49,26 +49,22 @@ export default function HotelSelectorModal({
   return (
     <AnimatePresence>
       {open && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          {/* Backdrop */}
-          <motion.div
-            key="backdrop"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            onClick={onClose}
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-          />
+        <motion.div
+          key="overlay"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-50 flex items-end md:items-center justify-center p-0 md:p-6"
+        >
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
 
-          {/* Modal */}
           <motion.div
             key="modal"
-            initial={{ opacity: 0, scale: 0.94, y: 16 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.94, y: 8 }}
+            initial={{ opacity: 0, y: 40, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.97 }}
             transition={{ type: 'spring', damping: 26, stiffness: 320 }}
-            className="relative z-10 w-full max-w-lg max-h-[85vh] flex flex-col bg-white rounded-3xl shadow-2xl overflow-hidden"
+            className="relative w-full max-h-[90svh] md:max-h-[85vh] md:w-[640px] flex flex-col bg-white rounded-t-3xl md:rounded-3xl shadow-2xl overflow-hidden"
           >
             {/* Header */}
             <div className="flex-shrink-0 flex items-center justify-between px-6 py-5 border-b border-brand-border">
@@ -205,7 +201,7 @@ export default function HotelSelectorModal({
               </button>
             </div>
           </motion.div>
-        </div>
+        </motion.div>
       )}
     </AnimatePresence>
   )
