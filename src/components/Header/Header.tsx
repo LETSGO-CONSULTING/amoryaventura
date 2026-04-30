@@ -30,6 +30,7 @@ export default function Header() {
   const navLinks = [
     { label: t('header.destinations'), href: '#destinos' },
     { label: t('header.tours'), href: '#tours' },
+    { label: t('header.packages'), href: '/paquetes', isRoute: true },
     { label: t('header.shop'), href: '/tienda', isRoute: true },
     { label: t('header.gallery'), href: '#galeria' },
   ]
